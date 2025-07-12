@@ -1,0 +1,103 @@
+{
+  "name": "vocabulary-learning-app",
+  "version": "2.0.0",
+  "description": "App per lo studio del vocabolario inglese con AI Assistant e statistiche avanzate",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "firebase": "^11.10.0",
+    "lucide-react": "^0.263.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1",
+    "recharts": "^2.15.4",
+    "tailwind-merge": "^3.3.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "build:fast": "CI=true GENERATE_SOURCEMAP=false INLINE_RUNTIME_CHUNK=false react-scripts build",
+    "build:docker": "CI=true GENERATE_SOURCEMAP=false react-scripts build",
+    "test": "react-scripts test --watchAll=false --coverage=false",
+    "eject": "react-scripts eject",
+    "build:analyze": "npm run build && npx source-map-explorer 'build/static/js/*.js'",
+    "serve": "npx serve -s build -l 3000",
+    "setup:env": "cp .env.example .env.local && echo 'Created .env.local - Please add your API keys!'",
+    "check:env": "node scripts/check-env.js",
+    "security:check": "npm audit && node scripts/security-check.js",
+    "config:status": "node scripts/config-status.js",
+    "docker:build": "docker build -t vocabulary-app .",
+    "docker:build:fast": "docker build --target builder -t vocabulary-app-dev .",
+    "docker:run": "docker run -p 3000:80 vocabulary-app",
+    "docker:dev": "docker-compose --profile dev up",
+    "docker:prod": "docker-compose up",
+    "docker:clean": "docker system prune -f && docker builder prune -f",
+    "dev": "npm run setup:env && npm start",
+    "deploy:vercel": "npm run build && vercel deploy --prod",
+    "deploy:netlify": "npm run build && netlify deploy --prod --dir=build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "react-hooks/exhaustive-deps": "warn",
+      "no-unused-vars": "warn",
+      "no-console": "off"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/merlinoalbus/learnEnglishVOC.git"
+  },
+  "keywords": [
+    "vocabulary",
+    "learning",
+    "english",
+    "react",
+    "ai-assistant",
+    "education",
+    "gemini-ai",
+    "secure-configuration"
+  ],
+  "author": "merlinoalbus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/merlinoalbus/learnEnglishVOC/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run security:check"
+    }
+  }
+}
